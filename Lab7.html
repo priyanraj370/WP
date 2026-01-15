@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Employee Info</title>
+  <style>
+     div{
+    padding:50px;
+    background-color: beige;
+    width:300px;
+    border-radius: 10px;
+  }
+  button{
+    background-color: aqua;
+    border-radius: 5px;
+  }
+  #out{
+    padding:30px;
+    width:200px;
+    background-color:palegoldenrod;
+  }
+
+  </style>
+</head>
+<body bgcolor="black">
+<center>
+<div>
+  <h3>Employee Info</h3>
+  <input type="text" id="ename" placeholder="Employee Name" required><br><br>
+  <input type="text" id="eid" placeholder="Employee ID" required><br><br>
+  <input type="number" id="basic" placeholder="Basic Salary" min="0" required><br><br>
+  <button onclick="calc()">Calculate</button><br><br>
+  <div id="out" style="color:rgb(0, 0, 0); font-family:Arial; font-size:14px;"></div>
+</div>
+
+<script>
+function calc() {
+  let name = document.getElementById("ename").value.trim();
+  let id = document.getElementById("eid").value.trim();
+  let basicInput = document.getElementById("basic").value;
+
+  if (!name || !id || !basicInput) { 
+    document.getElementById("out").innerHTML = "<b style='color:red'> Please fill all fields!</b>";
+    return;
+  }
+
+  let basic = Number(basicInput);
+
+  let DA = basic * 0.40;
+  let HRA = basic * 0.20;
+  let PF = basic * 0.12;
+  let TAX = basic * 0.10;
+
+  let gross = basic + DA + HRA;
+  let ded = PF + TAX;
+  let net = gross - ded;
+
+  const fmt = new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' });
+
+  document.getElementById("out").innerHTML = `
+    <b>Name:</b> ${name}<br>
+    <b>ID:</b> ${id}<br>
+    <b>Basic:</b> ${fmt.format(basic)}<br>
+    DA: ${fmt.format(DA)}, HRA: ${fmt.format(HRA)}<br>
+    PF: ${fmt.format(PF)}, TAX: ${fmt.format(TAX)}<br>
+    <b>Gross:</b> ${fmt.format(gross)}<br>
+    <b>Deduction:</b> ${fmt.format(ded)}<br>
+    <b>Net Pay:</b> ${fmt.format(net)}
+  `;
+}
+</script>
+
+</body>
+</html>

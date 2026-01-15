@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Form Validation</title>
+<style>
+  h1,h2,label{
+    color:rgb(0, 0, 0);
+  }
+  form{
+    padding:50px;
+    background-color: beige;
+    width:300px;
+    border-radius: 10px;
+  }
+</style>
+
+  <script>
+    function validateForm() {
+      let name = document.forms["myForm"]["name"].value.trim();
+      let email = document.forms["myForm"]["email"].value.trim();
+      let mobile = document.forms["myForm"]["mobile"].value.trim();
+      if (name === "" || email === "" || mobile === "") {
+        alert("Please fill out all required fields (Name, Email, Mobile Number).");
+        return false;
+      }
+      let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
+      if (!emailPattern.test(email)) {
+        alert("Please enter a valid email address.");
+        return false;
+      }
+      let mobilePattern = /^\d{10}$/;
+      if (!mobilePattern.test(mobile)) {
+        alert("Mobile number must be exactly 10 digits.");
+        return false;
+      }
+      alert("Form submitted successfully!");
+      return true;
+    }
+  </script>
+</head>
+<body bgcolor="pink">
+  <center>
+  <h1>Registration Form</h1>
+  <form name="myForm" onsubmit="return validateForm()">
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name"><br><br>
+
+    <label for="email">Email:</label><br>
+    <input type="text" id="email" name="email"><br><br>
+
+    <label for="mobile">Mobile Number:</label><br>
+    <input type="text" id="mobile" name="mobile"><br><br>
+
+    <label>Gender:</label><br>
+    <input type="radio" name="gender" value="Male"> Male<br>
+    <input type="radio" name="gender" value="Female"> Female<br><br>
+
+    <label>Hobbies:</label><br>
+    <input type="checkbox" name="hobby1" value="Reading"> Reading<br>
+    <input type="checkbox" name="hobby2" value="Music"> Music<br>
+    <input type="checkbox" name="hobby3" value="Sports"> Sports<br><br>
+
+    <input type="submit" value="Submit">
+  </form>
+</body>
+</html>
